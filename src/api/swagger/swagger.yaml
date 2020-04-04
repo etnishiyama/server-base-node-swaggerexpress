@@ -4,7 +4,7 @@ info:
   version: "0.0.1"
   title: NodeJS Swagger Base Project
 
-host: pokeapi.moboweb.com.br
+host: localhost:3000
 basePath: /api/v1dev
 
 schemes:

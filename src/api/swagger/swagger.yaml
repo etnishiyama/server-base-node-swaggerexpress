@@ -1,8 +1,8 @@
 swagger: "2.0"
 
 info:
-  version: "0.0.1"
-  title: NodeJS Swagger Base Project
+  version: "1.0.0"
+  title: Node.js SwaggerExpress Base Project
 
 host: localhost:3000
 basePath: /api/v1dev
@@ -24,142 +24,6 @@ securityDefinitions:
     name: apiKey
 
 paths:
-  # Partner paths
-  /partner:
-    x-swagger-router-controller: partner
-    post:
-      tags:
-        - Partner
-      security:
-        - apiKey: [ ]
-      x-security-scopes:
-        - USER
-        - ADMIN
-        - FRANCHISE
-      description: Creates a Partner
-      operationId: postPartnerCreate
-      parameters:
-        - in: body
-          name: body
-          description: Add new Partner to the database
-          required: true
-          schema:
-            $ref: "#/definitions/Partner"
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: "#/definitions/Partner"
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-    get:
-      tags:
-        - Partner
-      security:
-        - apiKey: [ ]
-      x-security-scopes:
-        - USER
-        - ADMIN
-        - FRANCHISE
-      description: Returns the list of all Partner
-      operationId: getPartnerList
-      parameters:
-        - name: page
-          in: query
-          description: current list pagination position
-          type: number
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: "#/definitions/PartnerListResponse"
-  /partner/{id}:
-    x-swagger-router-controller: partner
-    get:
-      tags:
-        - Partner
-      security:
-        - apiKey: [ ]
-      x-security-scopes:
-        - USER
-        - ADMIN
-        - FRANCHISE
-      description: Retrieves a specific Partner by id
-      operationId: getPartnerById
-      parameters:
-        - name: id
-          in: path
-          description: id of Partner
-          required: true
-          type: string
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: "#/definitions/PartnerResponse"
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-    put:
-      tags:
-        - Partner
-      security:
-        - apiKey: [ ]
-      x-security-scopes:
-        - USER
-        - ADMIN
-        - FRANCHISE
-      description: upsert a Partner by id
-      operationId: putPartnerUpsert
-      parameters:
-        - name: id
-          in: path
-          description: id of Partner
-          required: true
-          type: string
-        - in: body
-          name: body
-          description: Partner object data to update
-          required: true
-          schema:
-            $ref: "#/definitions/Partner"
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: "#/definitions/PartnerResponse"
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-    delete:
-      tags:
-        - Partner
-      security:
-        - apiKey: [ ]
-      x-security-scopes:
-        - USER
-        - ADMIN
-        - FRANCHISE
-      description: delete a specific Partner
-      operationId: deletePartnerRemove
-      parameters:
-        - name: id
-          in: path
-          description: id of Partner
-          required: true
-          type: string
-      responses:
-        204:
-          description: No content
-        default:
-            description: Error
-            schema:
-              $ref: "#/definitions/ErrorResponse"
-
   # User paths
   /user/authenticate:
     x-swagger-router-controller: user
@@ -326,40 +190,6 @@ definitions:
       message:
         type: string
 
-  # Partner definitions
-  PartnerListResponse:
-    title: Partner list response object
-    properties:
-      data:
-        type: array
-        items:
-          $ref: "#/definitions/Partner"
-  PartnerResponse:
-    title: Partner response object
-    properties:
-      data:
-        $ref: '#/definitions/Partner'
-  Partner:
-    title: Partner object model
-    type: object
-    required:
-      - name
-      - logo
-      - url
-    properties:
-      name:
-        type: string
-      logo:
-        type: string
-      url:
-        type: string
-      description:
-        type: string
-      docsInfo:
-        type: string
-      extra:
-        type: string
-
   # User definitions
   UserListResponse:
     title: User list response object
@@ -394,10 +224,6 @@ definitions:
             type: string
           email:
             type: string
-          dependents:
-            type: array
-            items:
-              $ref: "#/definitions/User"
   User:
     title: User object model
     type: object
@@ -416,16 +242,11 @@ definitions:
       email:
         type: string
         format: email
-      _company:
-        type: string
-      category:
-        type: string
-        enum: ['CLIENT', 'COMPANY', 'APP']
       password:
         type: string
       role:
         type: string
-        enum: ['ADMIN', 'USER', 'FRANCHISE', 'EMPLOYEE', 'DOCTOR']
+        enum: ['ADMIN', 'USER']
   UserAuth:
     title: User informations needed for authentication
     type: object

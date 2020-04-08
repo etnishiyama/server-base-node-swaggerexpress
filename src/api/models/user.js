@@ -30,10 +30,6 @@ const userSchema = new mongoose.Schema({
   workplace: {
     type: String,
   },
-  dependents: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-  }],
   password: {
     type: String,
     required: true,

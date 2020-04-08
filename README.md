@@ -1,13 +1,11 @@
-## NodeJS Swagger Base project
+## Node.js SwaggerExpress Base project
 
-### Setup
+### Pre-requisites
+ - Node.js
+ - MongoDB
+
+### Basic setup
 ```bash
 $ npm install
 $ npm start
-```
-
-
-## Whale it, you'll nail it!
-```bash
-$ docker-compose up
 ```
